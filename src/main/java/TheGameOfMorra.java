@@ -11,11 +11,11 @@ public class TheGameOfMorra extends Application {
 	}
 
 	//feel free to remove the starter code from this method
+	// push test
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		primaryStage.setTitle("(Client) Let's Play Morra!!!");
-		
 		Scene scene = new Scene(new HBox(),600,600);
 		primaryStage.setScene(scene);
 		primaryStage.show();
