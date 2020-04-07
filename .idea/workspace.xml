@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9685d228-6041-4571-9e4a-5de2c0334ae6" name="Default Changelist" comment="testing pushing">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MorraProject3Client.iml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="MERGE" />
+  </component>
+  <component name="ProjectId" id="1aCDKksTow7nRdOHeJhtWwRdXEQ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="false" id="Update" />
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9685d228-6041-4571-9e4a-5de2c0334ae6" name="Default Changelist" comment="" />
+      <created>1586230620671</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1586230620671</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="320" y="105" key="#Project_Structure" timestamp="1586231156534">
+      <screen x="0" y="23" width="1440" height="833" />
+    </state>
+    <state x="320" y="105" key="#Project_Structure/0.23.1440.833@0.23.1440.833" timestamp="1586231156534" />
+    <state x="135" y="42" key="CommitChangelistDialog2" timestamp="1586231142220">
+      <screen x="0" y="23" width="1440" height="833" />
+    </state>
+    <state x="135" y="42" key="CommitChangelistDialog2/0.23.1440.833@0.23.1440.833" timestamp="1586231142220" />
+    <state x="561" y="340" key="Github.ShareDialog" timestamp="1586230704036">
+      <screen x="0" y="23" width="1440" height="833" />
+    </state>
+    <state x="561" y="340" key="Github.ShareDialog/0.23.1440.833@0.23.1440.833" timestamp="1586230704036" />
+    <state x="277" y="153" key="Github.UntrackedFilesDialog" timestamp="1586230707763">
+      <screen x="0" y="23" width="1440" height="833" />
+    </state>
+    <state x="277" y="153" key="Github.UntrackedFilesDialog/0.23.1440.833@0.23.1440.833" timestamp="1586230707763" />
+    <state x="349" y="140" key="NewModule_or_Project.wizard" timestamp="1586230656552">
+      <screen x="0" y="23" width="1440" height="833" />
+    </state>
+    <state x="349" y="140" key="NewModule_or_Project.wizard/0.23.1440.833@0.23.1440.833" timestamp="1586230656552" />
+    <state x="509" y="363" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1586231096921">
+      <screen x="0" y="23" width="1440" height="833" />
+    </state>
+    <state x="509" y="363" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.833@0.23.1440.833" timestamp="1586231096921" />
+  </component>
+</project>
