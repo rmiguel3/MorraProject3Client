@@ -52,7 +52,7 @@ public class TheGameOfMorra extends Application {
 				System.exit(0);
 			}
 		});
-		
+
 		listItems2 = new ListView<String>();
 		c1 = new TextField();
 		b1 = new Button("Send");
@@ -61,7 +61,7 @@ public class TheGameOfMorra extends Application {
 		clientConnection.start();
 		clientBox = new VBox(10, c1,b1,listItems2);
 		clientBox.setStyle("-fx-background-color: blue");
-		Scene scene = new Scene(new HBox(),500,400);
+		Scene scene = new Scene(clientBox,500,400);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
