@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BaccaratProject.iml" filepath="$PROJECT_DIR$/BaccaratProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/MorraClient_Project3_Sp2020.iml" filepath="$PROJECT_DIR$/.idea/MorraClient_Project3_Sp2020.iml" />
     </modules>
   </component>
 </project>
