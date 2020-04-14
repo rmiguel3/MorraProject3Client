@@ -2,7 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9685d228-6041-4571-9e4a-5de2c0334ae6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/startScreen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/stone1copy.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/stone2copy.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/stone3copy.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/stone4copy.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/stone5copy.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/MorraClient_Project3_Sp2020.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MorraClient_Project3_Sp2020.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_mac_12_0_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_win_12_0_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_mac_12_0_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_win_12_0_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_mac_12.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_win_12.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_mac_12_0_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_win_12_0_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_12_20__11_51_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_12_20__11_51_AM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TheGameOfMorra.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TheGameOfMorra.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/stone1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/stone1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/stone2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/stone2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/stone3.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/stone3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/stone4.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/stone4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/stone5.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/stone5.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +37,13 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="MERGE" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
   <component name="ProjectId" id="1aCDKksTow7nRdOHeJhtWwRdXEQ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="false" id="Update" />
@@ -32,6 +56,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -112,6 +137,17 @@
     </task>
     <option name="localTasksCounter" value="8" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

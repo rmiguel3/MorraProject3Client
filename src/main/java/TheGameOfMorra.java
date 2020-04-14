@@ -1,5 +1,6 @@
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,21 +11,36 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.util.HashMap;
 
-public class TheGameOfMorra extends Application {
+import static javafx.application.Application.launch;
 
+public class TheGameOfMorra extends Application {
+	// declare start screen variables
+	TextField portBox;
+	Text portText;
+	TextField ipBox;
+	Text ipText;
+	Button openingScreenButton;
+	Scene startScene;
+
+	// main screen variables
 	TextField answerBox;
 	Button submitButton;
-	HashMap<String, Scene> sceneMap;
-	GridPane grid;
-	Scene startScene;
-	BorderPane startPane;
-	MorraClient clientConnection;
+	Pane mainScenePane;
+	Scene mainScene;
+	Text player1Score;
+	Text player2Score;
+	Text opponentPlay;
 
+	MorraClient clientConnection;
+	HashMap<String, Scene> sceneMap = new HashMap<>();
 	ListView<String> listItems2;
 
 	public static void main(String[] args) {
@@ -33,7 +49,6 @@ public class TheGameOfMorra extends Application {
 	}
 
 	//feel free to remove the starter code from this method
-
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
@@ -41,8 +56,11 @@ public class TheGameOfMorra extends Application {
 
 		clientConnection = new MorraClient(data->{
 			Platform.runLater(()->{listItems2.getItems().add(data.toString());
+				int lastMessage = listItems2.getItems().size();
+				listItems2.scrollTo(lastMessage);
 			});
 		});
+
 
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
@@ -52,23 +70,50 @@ public class TheGameOfMorra extends Application {
 			}
 		});
 
+		// set up start screen
+		portBox = new TextField();
 
+		// prevent user from being able to enter more than 4 characters for port
+		portBox.setTextFormatter(new TextFormatter<String>(change ->
+				change.getControlNewText().length() <= 4 ? change : null));
 
+		portText = new Text("Enter a port:");
+		portText.setFont(Font.font ("Verdana", 20));
+		portText.setStyle("-fx-font-weight: bold");
+		portText.setFill(Color.INDIGO);
+
+		ipBox = new TextField();
+		ipText = new Text("Enter an IP:");
+		ipText.setFont(Font.font ("Verdana", 20));
+		ipText.setStyle("-fx-font-weight: bold");
+		ipText.setFill(Color.INDIGO);
+
+		openingScreenButton = new Button("Let's play!");
+		Pane startPane = new Pane();
+
+		startPane.setBackground(new Background(new BackgroundImage(new Image("startScreen.png", 532, 720, false,true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,  BackgroundSize.DEFAULT)));
+
+		startPane.getChildren().addAll(ipText, ipBox, portText, portBox, openingScreenButton);
+		portText.relocate(185, 200);
+		portBox.relocate(165,230);
+		ipText.relocate(190,300);
+		ipBox.relocate(165, 330);
+		openingScreenButton.relocate(210, 400);
+
+		// set up main screen
 		listItems2 = new ListView<String>();
 		listItems2.setStyle("-fx-font-family: Verdana; -fx-font-weight: bold");
+		listItems2.setPrefSize(390,475);
 
-		answerBox = new TextField("");
-		// prevent user from being able to enter more than 4 characters for port
-		answerBox.setTextFormatter(new TextFormatter<String>(change ->
-				change.getControlNewText().length() <= 2 ? change : null));
+		answerBox = new TextField();
 
-		submitButton = new Button("Submit");
+		submitButton = new Button("Submit guess");
 		submitButton.setOnAction(e->{clientConnection.send(answerBox.getText()); answerBox.clear();});
 
 		clientConnection.start();
 
-		Pane mainScenePane = new Pane();
-		mainScenePane.setBackground(new Background(new BackgroundImage(new Image("Borobudur_Temple.jpg", 800, 450, false,true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,  BackgroundSize.DEFAULT)));
+		mainScenePane = new Pane();
+		mainScenePane.setBackground(new Background(new BackgroundImage(new Image("Borobudur_Temple.jpg", 900, 495, false,true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,  BackgroundSize.DEFAULT)));
 
 		// buttons for guessing
 		ImageView stone1 = new ImageView(new Image("stone1.png", 100, 100, false, true));
@@ -77,17 +122,42 @@ public class TheGameOfMorra extends Application {
 		ImageView stone4 = new ImageView(new Image("stone4.png", 100, 100, false, true));
 		ImageView stone5 = new ImageView(new Image("stone5.png", 100, 100, false, true));
 
-		HBox guessImages = new HBox();
-		guessImages.getChildren().addAll(stone1, stone2, stone3, stone4, stone5);
+		HBox guessImages = new HBox(0,stone1, stone2, stone3, stone4, stone5);
 
-		mainScenePane.getChildren().addAll(answerBox, submitButton, listItems2, guessImages);
+		player1Score = new Text("Player 1 score:");
+		player1Score.setFont(Font.font ("Verdana", 20));
+		player1Score.setStyle("-fx-font-weight: bold");
+		player1Score.setFill(Color.INDIGO);
+
+		player2Score = new Text("Player 2 score:");
+		player2Score.setFont(Font.font ("Verdana", 20));
+		player2Score.setStyle("-fx-font-weight: bold");
+		player2Score.setFill(Color.INDIGO);
+
+		opponentPlay = new Text("Opponent played:");
+		opponentPlay.setFont(Font.font ("Verdana", 20));
+		opponentPlay.setStyle("-fx-font-weight: bold");
+		opponentPlay.setFill(Color.INDIGO);
+
+		mainScenePane.getChildren().addAll(answerBox, submitButton, listItems2, guessImages, player1Score, player2Score, opponentPlay);
 		answerBox.relocate(100,200);
 		submitButton.relocate(100, 240);
-		listItems2.relocate(520, 25);
+		listItems2.relocate(500, 10);
 		guessImages.relocate(0, 335);
+		opponentPlay.relocate(5, 10);
+		player1Score.relocate(275,10);
+		player2Score.relocate(275, 50);
 
 
 		// implement clicking functionality for buttons
+		openingScreenButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				sceneMap.put("main screen", new Scene(mainScenePane,900,495));
+				primaryStage.setScene(sceneMap.get("main screen"));
+			}
+		});
+
 		stone1.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -102,8 +172,6 @@ public class TheGameOfMorra extends Application {
 
 				stone5.setDisable(true);
 				stone5.setVisible(false);
-
-				clientConnection.send("1");
 			}
 		});
 
@@ -121,8 +189,6 @@ public class TheGameOfMorra extends Application {
 
 				stone5.setDisable(true);
 				stone5.setVisible(false);
-
-				clientConnection.send("2");
 			}
 		});
 
@@ -140,8 +206,6 @@ public class TheGameOfMorra extends Application {
 
 				stone5.setDisable(true);
 				stone5.setVisible(false);
-
-				clientConnection.send("3");
 			}
 		});
 
@@ -159,8 +223,6 @@ public class TheGameOfMorra extends Application {
 
 				stone5.setDisable(true);
 				stone5.setVisible(false);
-
-				clientConnection.send("4");
 			}
 		});
 
@@ -178,15 +240,13 @@ public class TheGameOfMorra extends Application {
 
 				stone1.setDisable(true);
 				stone1.setVisible(false);
-
-				clientConnection.send("5");
 			}
 		});
 
-		clientConnection.send(answerBox.getText());
 
-		Scene scene = new Scene(mainScenePane,800,450);
-		primaryStage.setScene(scene);
+		// show the start screen
+		sceneMap.put("start screen", new Scene(startPane, 532, 720));
+		primaryStage.setScene(sceneMap.get("start screen"));
 		primaryStage.show();
 	}
 
