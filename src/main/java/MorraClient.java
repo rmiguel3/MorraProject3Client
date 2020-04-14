@@ -9,14 +9,14 @@ public class MorraClient extends Thread{
 
 
     Socket socketClient;
-
+    MorraInfo morraInfo = new MorraInfo();
+    MorraInfo clientInfo = new MorraInfo();
     ObjectOutputStream out;
     ObjectInputStream in;
 
     private Consumer<Serializable> callback;
 
     MorraClient(Consumer<Serializable> call){
-
         callback = call;
     }
 
@@ -28,11 +28,12 @@ public class MorraClient extends Thread{
             in = new ObjectInputStream(socketClient.getInputStream());
             socketClient.setTcpNoDelay(true);
         }
-        catch(Exception e) {}
+        catch(Exception e){}
 
         while(true) {
-
+            //receives the MorraInfo class from the server
             try {
+                clientInfo = (MorraInfo) in.readObject();
                 String message = in.readObject().toString();
                 callback.accept(message);
             }
@@ -41,10 +42,18 @@ public class MorraClient extends Thread{
 
     }
 
+    //sends the morraInfo class to the Server
     public void send(String data) {
-
         try {
-            out.writeObject(data);
+            if(clientInfo.getpNum() == 1){
+                clientInfo.setP1Plays(data);
+            }
+            else if(clientInfo.getpNum() == 2){
+                clientInfo.setP2Plays(data);
+            }
+            out.reset();
+            out.flush();
+            out.writeObject(clientInfo);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

@@ -5,8 +5,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -14,10 +16,13 @@ import java.util.HashMap;
 
 public class TheGameOfMorra extends Application {
 
-	TextField answerBox;
-	Button submitButton;
+	TextField s1,s2,s3,s4, c1;
+	Button serverChoice,clientChoice,b1;
 	HashMap<String, Scene> sceneMap;
+	MorraInfo morraInfo = new MorraInfo();
 	GridPane grid;
+	HBox buttonBox;
+	VBox clientBox;
 	Scene startScene;
 	BorderPane startPane;
 	MorraClient clientConnection;
@@ -50,22 +55,17 @@ public class TheGameOfMorra extends Application {
 		});
 
 		listItems2 = new ListView<String>();
-		listItems2.setStyle("-fx-font-family: Verdana; -fx-font-weight: bold");
-		answerBox = new TextField("Enter your guess");
-		submitButton = new Button("Submit");
-		submitButton.setOnAction(e->{clientConnection.send(answerBox.getText()); answerBox.clear();});
+		c1 = new TextField();
+		b1 = new Button("Send");
+		b1.setOnAction(e->{
+			clientConnection.send(c1.getText());
+			c1.clear();
+		});
 
 		clientConnection.start();
-
-		Pane mainScenePane = new Pane();
-		mainScenePane.setBackground(new Background(new BackgroundImage(new Image("Borobudur_Temple.jpg", 800, 450, false,true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,  BackgroundSize.DEFAULT)));
-
-		mainScenePane.getChildren().addAll(answerBox, submitButton, listItems2);
-		answerBox.relocate(100,200);
-		listItems2.relocate(520, 25);
-
-
-		Scene scene = new Scene(mainScenePane,800,450);
+		clientBox = new VBox(10, c1,b1,listItems2);
+		clientBox.setStyle("-fx-background-color: blue");
+		Scene scene = new Scene(clientBox,500,400);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}

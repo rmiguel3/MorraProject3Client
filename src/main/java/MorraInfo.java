@@ -5,8 +5,25 @@ public class MorraInfo implements Serializable{
     private int p1Points;
     private int p2Points;
     private String p1Plays;
-    private Boolean have2players;
     private String p2Plays;
+    private int pNum;
+    private String playerString;
+
+    public String getPlayerString() {
+        return playerString;
+    }
+
+    public void setPlayerString(String playerString) {
+        this.playerString = playerString;
+    }
+
+    public int getpNum() {
+        return pNum;
+    }
+
+    public void setpNum(int pNum) {
+        this.pNum = pNum;
+    }
 
     public int getP1Points() {
         return p1Points;
@@ -38,14 +55,6 @@ public class MorraInfo implements Serializable{
 
     public void setP2Plays(String p2Plays) {
         this.p2Plays = p2Plays;
-    }
-
-    public Boolean getHave2players() {
-        return have2players;
-    }
-
-    public void setHave2players(Boolean have2players) {
-        this.have2players = have2players;
     }
 
 }
