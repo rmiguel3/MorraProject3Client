@@ -54,13 +54,6 @@ public class TheGameOfMorra extends Application {
 		// TODO Auto-generated method stub
 		primaryStage.setTitle("(Client) Let's Play Morra!!!");
 
-		clientConnection = new MorraClient(data->{
-			Platform.runLater(()->{listItems2.getItems().add(data.toString());
-				int lastMessage = listItems2.getItems().size();
-				listItems2.scrollTo(lastMessage);
-			});
-		});
-
 
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
@@ -110,8 +103,6 @@ public class TheGameOfMorra extends Application {
 		submitButton = new Button("Submit guess");
 		submitButton.setOnAction(e->{clientConnection.send(answerBox.getText()); answerBox.clear();});
 
-		clientConnection.start();
-
 		mainScenePane = new Pane();
 		mainScenePane.setBackground(new Background(new BackgroundImage(new Image("Borobudur_Temple.jpg", 900, 495, false,true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,  BackgroundSize.DEFAULT)));
 
@@ -153,6 +144,15 @@ public class TheGameOfMorra extends Application {
 		openingScreenButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				clientConnection = new MorraClient(data->{
+					Platform.runLater(()->{listItems2.getItems().add(data.toString());
+						int lastMessage = listItems2.getItems().size();
+						listItems2.scrollTo(lastMessage);
+					});
+				}, Integer.parseInt(portBox.getText()), ipBox.getText());
+
+				clientConnection.start();
+
 				sceneMap.put("main screen", new Scene(mainScenePane,900,495));
 				primaryStage.setScene(sceneMap.get("main screen"));
 			}
