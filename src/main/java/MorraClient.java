@@ -9,6 +9,8 @@ public class MorraClient extends Thread{
 
 
     Socket socketClient;
+    int portNum;
+    String ip;
     //MorraInfo morraInfo = new MorraInfo();
     MorraInfo clientInfo = new MorraInfo();
     ObjectOutputStream out;
@@ -16,14 +18,16 @@ public class MorraClient extends Thread{
 
     private Consumer<Serializable> callback;
 
-    MorraClient(Consumer<Serializable> call){
+    MorraClient(Consumer<Serializable> call, int p, String ipAddress){
+        portNum = p;
+        ip = ipAddress;
         callback = call;
     }
 
     public void run() {
 
         try {
-            socketClient= new Socket("127.0.0.1",5555);
+            socketClient= new Socket(ip,portNum);
             out = new ObjectOutputStream(socketClient.getOutputStream());
             in = new ObjectInputStream(socketClient.getInputStream());
             socketClient.setTcpNoDelay(true);
