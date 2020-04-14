@@ -9,18 +9,18 @@ public class MorraClient extends Thread{
 
 
     Socket socketClient;
+    MorraInfo morraInfo = new MorraInfo();
+    MorraInfo clientInfo = new MorraInfo();
     int portNum;
     String ip;
-    //MorraInfo morraInfo = new MorraInfo();
-    MorraInfo clientInfo = new MorraInfo();
     ObjectOutputStream out;
     ObjectInputStream in;
 
     private Consumer<Serializable> callback;
 
     MorraClient(Consumer<Serializable> call, int p, String ipAddress){
-        portNum = p;
         ip = ipAddress;
+        portNum = p;
         callback = call;
     }
 

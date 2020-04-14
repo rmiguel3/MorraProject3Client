@@ -55,6 +55,8 @@ public class TheGameOfMorra extends Application {
 		primaryStage.setTitle("(Client) Let's Play Morra!!!");
 
 
+
+
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
 			public void handle(WindowEvent t) {
@@ -172,6 +174,8 @@ public class TheGameOfMorra extends Application {
 
 				stone5.setDisable(true);
 				stone5.setVisible(false);
+
+				clientConnection.send("1");
 			}
 		});
 
@@ -189,6 +193,8 @@ public class TheGameOfMorra extends Application {
 
 				stone5.setDisable(true);
 				stone5.setVisible(false);
+
+				clientConnection.send("2");
 			}
 		});
 
@@ -206,6 +212,8 @@ public class TheGameOfMorra extends Application {
 
 				stone5.setDisable(true);
 				stone5.setVisible(false);
+
+				clientConnection.send("3");
 			}
 		});
 
@@ -223,6 +231,8 @@ public class TheGameOfMorra extends Application {
 
 				stone5.setDisable(true);
 				stone5.setVisible(false);
+
+				clientConnection.send("4");
 			}
 		});
 
@@ -240,6 +250,8 @@ public class TheGameOfMorra extends Application {
 
 				stone1.setDisable(true);
 				stone1.setVisible(false);
+
+				clientConnection.send("5");
 			}
 		});
 
