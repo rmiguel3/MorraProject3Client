@@ -7,7 +7,6 @@ import java.util.function.Consumer;
 
 public class MorraClient extends Thread{
     Socket socketClient;
-    MorraInfo morraInfo = new MorraInfo();
     MorraInfo clientInfo = new MorraInfo();
     int portNum;
     String ip;
@@ -36,8 +35,7 @@ public class MorraClient extends Thread{
             //receives the MorraInfo class from the server
             try {
                 clientInfo = (MorraInfo) in.readObject();
-                String message = in.readObject().toString();
-                callback.accept(message);
+                callback.accept(clientInfo.getPlayerString());
             }
             catch(Exception e) {}
         }
@@ -53,9 +51,8 @@ public class MorraClient extends Thread{
             else if(clientInfo.getpNum() == 2){
                 clientInfo.setP2Plays(data);
             }
-            out.reset();
-            out.flush();
             out.writeObject(clientInfo);
+            out.reset();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

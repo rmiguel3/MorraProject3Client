@@ -8,6 +8,15 @@ public class MorraInfo implements Serializable{
     private String p2Plays;
     private int pNum;
     private String playerString;
+    private boolean twoPlayers;
+
+    public boolean isTwoPlayers() {
+        return twoPlayers;
+    }
+
+    public void setTwoPlayers(boolean have2Players) {
+        this.twoPlayers = have2Players;
+    }
 
     public String getPlayerString() {
         return playerString;

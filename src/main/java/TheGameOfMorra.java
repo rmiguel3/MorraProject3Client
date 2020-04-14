@@ -220,6 +220,7 @@ public class TheGameOfMorra extends Application {
 				stone5.setVisible(false);
 
 				clientGuess = "1";
+
 			}
 		});
 
@@ -242,6 +243,7 @@ public class TheGameOfMorra extends Application {
 				stone5.setVisible(false);
 
 				clientGuess = "2";
+
 			}
 		});
 
@@ -264,6 +266,7 @@ public class TheGameOfMorra extends Application {
 				stone5.setVisible(false);
 
 				clientGuess = "3";
+
 			}
 		});
 
@@ -308,6 +311,7 @@ public class TheGameOfMorra extends Application {
 				stone1.setVisible(false);
 
 				clientGuess = "5";
+
 			}
 		});
 
