@@ -33,11 +33,13 @@ public class TheGameOfMorra extends Application {
 	// main screen variables
 	TextField answerBox;
 	Button submitButton;
+	Button quitButton;
 	Pane mainScenePane;
 	Scene mainScene;
 	Text player1Score;
 	Text player2Score;
 	Text opponentPlay;
+	String clientGuess;
 
 	MorraClient clientConnection;
 	HashMap<String, Scene> sceneMap = new HashMap<>();
@@ -62,18 +64,20 @@ public class TheGameOfMorra extends Application {
 			}
 		});
 
-		// set up start screen
+		// set up start screen:
 		portBox = new TextField();
 
 		// prevent user from being able to enter more than 4 characters for port
 		portBox.setTextFormatter(new TextFormatter<String>(change ->
 				change.getControlNewText().length() <= 4 ? change : null));
 
+		// textbox for entering port
 		portText = new Text("Enter a port:");
 		portText.setFont(Font.font ("Verdana", 20));
 		portText.setStyle("-fx-font-weight: bold");
 		portText.setFill(Color.INDIGO);
 
+		// textbox for entering ip address
 		ipBox = new TextField();
 		ipText = new Text("Enter an IP:");
 		ipText.setFont(Font.font ("Verdana", 20));
@@ -81,8 +85,8 @@ public class TheGameOfMorra extends Application {
 		ipText.setFill(Color.INDIGO);
 
 		openingScreenButton = new Button("Let's play!");
-		Pane startPane = new Pane();
 
+		Pane startPane = new Pane();
 		startPane.setBackground(new Background(new BackgroundImage(new Image("startScreen.png", 532, 720, false,true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,  BackgroundSize.DEFAULT)));
 
 		startPane.getChildren().addAll(ipText, ipBox, portText, portBox, openingScreenButton);
@@ -92,12 +96,14 @@ public class TheGameOfMorra extends Application {
 		ipBox.relocate(165, 330);
 		openingScreenButton.relocate(210, 400);
 
-		// set up main screen
+		// set up main screen:
 		listItems2 = new ListView<String>();
 		listItems2.setStyle("-fx-font-family: Verdana; -fx-font-weight: bold");
 		listItems2.setPrefSize(390,475);
 
 		answerBox = new TextField();
+
+		quitButton = new Button("Quit");
 
 		submitButton = new Button("Submit guess");
 		submitButton.setOnAction(e->{clientConnection.send(answerBox.getText()); answerBox.clear();});
@@ -130,9 +136,11 @@ public class TheGameOfMorra extends Application {
 		opponentPlay.setStyle("-fx-font-weight: bold");
 		opponentPlay.setFill(Color.INDIGO);
 
-		mainScenePane.getChildren().addAll(answerBox, submitButton, listItems2, guessImages, player1Score, player2Score, opponentPlay);
-		answerBox.relocate(10,200);
-		submitButton.relocate(10, 240);
+
+		mainScenePane.getChildren().addAll(answerBox, submitButton, listItems2, guessImages, player1Score, player2Score, opponentPlay, quitButton);
+		answerBox.relocate(20,170);
+		submitButton.relocate(20, 210);
+		quitButton.relocate(20, 250);
 		listItems2.relocate(700, 10);
 		guessImages.relocate(0, 380);
 		opponentPlay.relocate(5, 10);
@@ -140,7 +148,15 @@ public class TheGameOfMorra extends Application {
 		player2Score.relocate(275, 50);
 
 
-		// implement clicking functionality for buttons
+		// implement clicking functionality for buttons:
+
+		// quit button
+		quitButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.exit(0);
+			}
+		});
 
 		// "Let's play!" button
 		openingScreenButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -181,7 +197,7 @@ public class TheGameOfMorra extends Application {
 				stone5.setDisable(true);
 				stone5.setVisible(false);
 
-				clientConnection.send("0");
+				clientGuess = "0";
 			}
 		});
 
@@ -203,7 +219,7 @@ public class TheGameOfMorra extends Application {
 				stone5.setDisable(true);
 				stone5.setVisible(false);
 
-				clientConnection.send("1");
+				clientGuess = "1";
 			}
 		});
 
@@ -225,7 +241,7 @@ public class TheGameOfMorra extends Application {
 				stone5.setDisable(true);
 				stone5.setVisible(false);
 
-				clientConnection.send("2");
+				clientGuess = "2";
 			}
 		});
 
@@ -247,7 +263,7 @@ public class TheGameOfMorra extends Application {
 				stone5.setDisable(true);
 				stone5.setVisible(false);
 
-				clientConnection.send("3");
+				clientGuess = "3";
 			}
 		});
 
@@ -269,7 +285,7 @@ public class TheGameOfMorra extends Application {
 				stone5.setDisable(true);
 				stone5.setVisible(false);
 
-				clientConnection.send("4");
+				clientGuess = "4";
 			}
 		});
 
@@ -291,10 +307,48 @@ public class TheGameOfMorra extends Application {
 				stone1.setDisable(true);
 				stone1.setVisible(false);
 
-				clientConnection.send("5");
+				clientGuess = "5";
 			}
 		});
 
+		// submit guess button:
+		submitButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				// if guess was valid, then handle round end actions
+				if (Integer.parseInt(answerBox.getText()) >= 1 || Integer.parseInt(answerBox.getText()) <= 10) {
+					// send number option and guess to server
+					clientConnection.send(clientGuess);
+					clientConnection.send(answerBox.getText());
+
+					// clear textbox and show numbers
+					answerBox.clear();
+
+					stone0.setDisable(false);
+					stone0.setVisible(true);
+
+					stone1.setDisable(false);
+					stone1.setVisible(true);
+
+					stone2.setDisable(false);
+					stone2.setVisible(true);
+
+					stone3.setDisable(false);
+					stone3.setVisible(true);
+
+					stone4.setDisable(false);
+					stone4.setVisible(true);
+
+					stone5.setDisable(false);
+					stone5.setVisible(true);
+
+					// display opponent's pick
+//					ImageView opponentPick = new ImageView(new Image("stone" + /*finger pick of client that isn't this one*/ + "copy.png", 100, 100, false, true));
+//					mainScenePane.getChildren().add(opponentPick);
+//					opponentPick.relocate(50, 40);
+				}
+			}
+		});
 
 		// show the start screen
 		sceneMap.put("start screen", new Scene(startPane, 532, 720));
