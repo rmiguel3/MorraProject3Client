@@ -102,6 +102,8 @@ public class TheGameOfMorra extends Application {
 
 				stone5.setDisable(true);
 				stone5.setVisible(false);
+
+				clientConnection.send("1");
 			}
 		});
 
@@ -119,6 +121,8 @@ public class TheGameOfMorra extends Application {
 
 				stone5.setDisable(true);
 				stone5.setVisible(false);
+
+				clientConnection.send("2");
 			}
 		});
 
@@ -136,6 +140,8 @@ public class TheGameOfMorra extends Application {
 
 				stone5.setDisable(true);
 				stone5.setVisible(false);
+
+				clientConnection.send("3");
 			}
 		});
 
@@ -153,6 +159,8 @@ public class TheGameOfMorra extends Application {
 
 				stone5.setDisable(true);
 				stone5.setVisible(false);
+
+				clientConnection.send("4");
 			}
 		});
 
@@ -170,10 +178,12 @@ public class TheGameOfMorra extends Application {
 
 				stone1.setDisable(true);
 				stone1.setVisible(false);
+
+				clientConnection.send("5");
 			}
 		});
 
-
+		clientConnection.send(answerBox.getText());
 
 		Scene scene = new Scene(mainScenePane,800,450);
 		primaryStage.setScene(scene);

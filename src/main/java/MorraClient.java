@@ -9,7 +9,7 @@ public class MorraClient extends Thread{
 
 
     Socket socketClient;
-    MorraInfo morraInfo = new MorraInfo();
+    //MorraInfo morraInfo = new MorraInfo();
     MorraInfo clientInfo = new MorraInfo();
     ObjectOutputStream out;
     ObjectInputStream in;
