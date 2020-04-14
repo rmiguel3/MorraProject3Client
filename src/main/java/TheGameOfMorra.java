@@ -54,9 +54,6 @@ public class TheGameOfMorra extends Application {
 		// TODO Auto-generated method stub
 		primaryStage.setTitle("(Client) Let's Play Morra!!!");
 
-
-
-
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
 			public void handle(WindowEvent t) {
@@ -106,16 +103,17 @@ public class TheGameOfMorra extends Application {
 		submitButton.setOnAction(e->{clientConnection.send(answerBox.getText()); answerBox.clear();});
 
 		mainScenePane = new Pane();
-		mainScenePane.setBackground(new Background(new BackgroundImage(new Image("Borobudur_Temple.jpg", 900, 495, false,true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,  BackgroundSize.DEFAULT)));
+		mainScenePane.setBackground(new Background(new BackgroundImage(new Image("Borobudur_Temple.jpg", 1100, 495, false,true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,  BackgroundSize.DEFAULT)));
 
 		// buttons for guessing
+		ImageView stone0 = new ImageView(new Image("stone0.png", 100, 100, false, true));
 		ImageView stone1 = new ImageView(new Image("stone1.png", 100, 100, false, true));
 		ImageView stone2 = new ImageView(new Image("stone2.png", 100, 100, false, true));
 		ImageView stone3 = new ImageView(new Image("stone3.png",100, 100, false, true));
 		ImageView stone4 = new ImageView(new Image("stone4.png", 100, 100, false, true));
 		ImageView stone5 = new ImageView(new Image("stone5.png", 100, 100, false, true));
 
-		HBox guessImages = new HBox(0,stone1, stone2, stone3, stone4, stone5);
+		HBox guessImages = new HBox(18, stone0, stone1, stone2, stone3, stone4, stone5);
 
 		player1Score = new Text("Player 1 score:");
 		player1Score.setFont(Font.font ("Verdana", 20));
@@ -133,36 +131,66 @@ public class TheGameOfMorra extends Application {
 		opponentPlay.setFill(Color.INDIGO);
 
 		mainScenePane.getChildren().addAll(answerBox, submitButton, listItems2, guessImages, player1Score, player2Score, opponentPlay);
-		answerBox.relocate(100,200);
-		submitButton.relocate(100, 240);
-		listItems2.relocate(500, 10);
-		guessImages.relocate(0, 335);
+		answerBox.relocate(10,200);
+		submitButton.relocate(10, 240);
+		listItems2.relocate(700, 10);
+		guessImages.relocate(0, 380);
 		opponentPlay.relocate(5, 10);
 		player1Score.relocate(275,10);
 		player2Score.relocate(275, 50);
 
 
 		// implement clicking functionality for buttons
+
+		// "Let's play!" button
 		openingScreenButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				// display main game once port and ip are entered
 				clientConnection = new MorraClient(data->{
-					Platform.runLater(()->{listItems2.getItems().add(data.toString());
-						int lastMessage = listItems2.getItems().size();
-						listItems2.scrollTo(lastMessage);
-					});
-				}, Integer.parseInt(portBox.getText()), ipBox.getText());
+						Platform.runLater(()->{listItems2.getItems().add(data.toString());
+							int lastMessage = listItems2.getItems().size();
+							listItems2.scrollTo(lastMessage);
+						});
+					}, Integer.parseInt(portBox.getText()), ipBox.getText());
 
 				clientConnection.start();
 
-				sceneMap.put("main screen", new Scene(mainScenePane,900,495));
+				sceneMap.put("main screen", new Scene(mainScenePane,1100,495));
 				primaryStage.setScene(sceneMap.get("main screen"));
+
+			}
+		});
+
+		// "finger" choices
+		stone0.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				stone1.setDisable(true);
+				stone1.setVisible(false);
+
+				stone2.setDisable(true);
+				stone2.setVisible(false);
+
+				stone3.setDisable(true);
+				stone3.setVisible(false);
+
+				stone4.setDisable(true);
+				stone4.setVisible(false);
+
+				stone5.setDisable(true);
+				stone5.setVisible(false);
+
+				clientConnection.send("0");
 			}
 		});
 
 		stone1.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
+				stone0.setDisable(true);
+				stone0.setVisible(false);
+
 				stone2.setDisable(true);
 				stone2.setVisible(false);
 
@@ -182,6 +210,9 @@ public class TheGameOfMorra extends Application {
 		stone2.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
+				stone0.setDisable(true);
+				stone0.setVisible(false);
+
 				stone1.setDisable(true);
 				stone1.setVisible(false);
 
@@ -201,6 +232,9 @@ public class TheGameOfMorra extends Application {
 		stone3.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
+				stone0.setDisable(true);
+				stone0.setVisible(false);
+
 				stone2.setDisable(true);
 				stone2.setVisible(false);
 
@@ -220,6 +254,9 @@ public class TheGameOfMorra extends Application {
 		stone4.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
+				stone0.setDisable(true);
+				stone0.setVisible(false);
+
 				stone2.setDisable(true);
 				stone2.setVisible(false);
 
@@ -239,6 +276,9 @@ public class TheGameOfMorra extends Application {
 		stone5.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
+				stone0.setDisable(true);
+				stone0.setVisible(false);
+
 				stone2.setDisable(true);
 				stone2.setVisible(false);
 
