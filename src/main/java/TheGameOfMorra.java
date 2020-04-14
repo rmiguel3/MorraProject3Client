@@ -30,6 +30,10 @@ public class TheGameOfMorra extends Application {
 	Button openingScreenButton;
 	Scene startScene;
 
+	// waiting screen
+	Text waitingText;
+	Pane waitingScenePane;
+
 	// main screen variables
 	TextField answerBox;
 	Button submitButton;
@@ -95,6 +99,16 @@ public class TheGameOfMorra extends Application {
 		ipText.relocate(190,300);
 		ipBox.relocate(165, 330);
 		openingScreenButton.relocate(210, 400);
+
+		// set up waiting screen:
+		waitingText = new Text("Waiting for another player...");
+		ipText.setFont(Font.font ("Verdana", 40));
+		ipText.setStyle("-fx-font-weight: bold");
+		ipText.setFill(Color.INDIGO);
+
+		waitingScenePane = new Pane(waitingText);
+		waitingScenePane.setBackground(new Background(new BackgroundImage(new Image("istockphoto-686783780-612x612.jpg", 532, 720, false,true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,  BackgroundSize.DEFAULT)));
+
 
 		// set up main screen:
 		listItems2 = new ListView<String>();
@@ -162,6 +176,9 @@ public class TheGameOfMorra extends Application {
 		openingScreenButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				if (clientConnection.clientInfo.get)
+
+
 				// display main game once port and ip are entered
 				clientConnection = new MorraClient(data->{
 						Platform.runLater(()->{listItems2.getItems().add(data.toString());
