@@ -102,13 +102,14 @@ public class TheGameOfMorra extends Application {
 
 		// set up waiting screen:
 		waitingText = new Text("Waiting for another player...");
-		ipText.setFont(Font.font ("Verdana", 40));
-		ipText.setStyle("-fx-font-weight: bold");
-		ipText.setFill(Color.INDIGO);
+		waitingText.setFont(Font.font ("Verdana", 40));
+		waitingText.setStyle("-fx-font-weight: bold");
+		waitingText.setFill(Color.INDIGO);
 
 		waitingScenePane = new Pane(waitingText);
-		waitingScenePane.setBackground(new Background(new BackgroundImage(new Image("istockphoto-686783780-612x612.jpg", 532, 720, false,true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,  BackgroundSize.DEFAULT)));
+		waitingScenePane.setBackground(new Background(new BackgroundImage(new Image("istockphoto-686783780-612x612.jpg", 1100, 495, false,true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,  BackgroundSize.DEFAULT)));
 
+		waitingText.relocate(220, 225);
 
 		// set up main screen:
 		listItems2 = new ListView<String>();
@@ -176,22 +177,24 @@ public class TheGameOfMorra extends Application {
 		openingScreenButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				if (clientConnection.clientInfo.get)
-
-
-				// display main game once port and ip are entered
+				// initialize client object once port and ip are entered
 				clientConnection = new MorraClient(data->{
-						Platform.runLater(()->{listItems2.getItems().add(data.toString());
-							int lastMessage = listItems2.getItems().size();
-							listItems2.scrollTo(lastMessage);
-						});
-					}, Integer.parseInt(portBox.getText()), ipBox.getText());
-
+					Platform.runLater(()->{listItems2.getItems().add(data.toString());
+						int lastMessage = listItems2.getItems().size();
+						listItems2.scrollTo(lastMessage);
+					});
+				}, Integer.parseInt(portBox.getText()), ipBox.getText());
 				clientConnection.start();
 
-				sceneMap.put("main screen", new Scene(mainScenePane,1100,495));
-				primaryStage.setScene(sceneMap.get("main screen"));
-
+				// if there are two clients, then display the main game, otherwise display the waiting screen
+				if (clientConnection.clientInfo.isTwoPlayers()) {
+					sceneMap.put("main screen", new Scene(mainScenePane,1100,495));
+					primaryStage.setScene(sceneMap.get("main screen"));
+				}
+				else {
+					sceneMap.put("waiting screen", new Scene(waitingScenePane, 1100, 495));
+					primaryStage.setScene(sceneMap.get("waiting screen"));
+				}
 			}
 		});
 
