@@ -42,6 +42,19 @@ public class MorraClient extends Thread{
 
     }
 
+    //checks to see if player 1 or player 2 who and returns a value
+    public int whoWon(){
+        if(clientInfo.getP1Points() == 2){
+            callback.accept("Player 1 has won the game");
+            return 1;
+        }
+        else if(clientInfo.getP2Points() == 2){
+            callback.accept("Player 2 has won the game");
+            return 2;
+        }
+        return 0;
+    }
+
     //sends the morraInfo class to the Server
     public void send(String data) {
         try {

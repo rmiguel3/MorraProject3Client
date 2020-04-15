@@ -187,14 +187,14 @@ public class TheGameOfMorra extends Application {
 				clientConnection.start();
 
 				// if there are two clients, then display the main game, otherwise display the waiting screen
-				if (clientConnection.clientInfo.isTwoPlayers()) {
+				//if (clientConnection.clientInfo.isTwoPlayers()) {
 					sceneMap.put("main screen", new Scene(mainScenePane,1100,495));
 					primaryStage.setScene(sceneMap.get("main screen"));
-				}
-				else {
+				//}
+				/*else {
 					sceneMap.put("waiting screen", new Scene(waitingScenePane, 1100, 495));
 					primaryStage.setScene(sceneMap.get("waiting screen"));
-				}
+				}*/
 			}
 		});
 
