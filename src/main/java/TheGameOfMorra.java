@@ -30,18 +30,21 @@ public class TheGameOfMorra extends Application {
 	Button openingScreenButton;
 	Scene startScene;
 
-	// waiting screen
-	Text waitingText;
-	Pane waitingScenePane;
+	// winning screen
+	Text player1GameEndText;
+	Text player2GameEndText;
+	Pane gameEndScenePane;
 
 	// main screen variables
+	int player1Score = 0;
+	int player2Score = 0;
 	TextField answerBox;
 	Button submitButton;
 	Button quitButton;
 	Pane mainScenePane;
 	Scene mainScene;
-	Text player1Score;
-	Text player2Score;
+	Text player1ScoreText;
+	Text player2ScoreText;
 	Text opponentPlay;
 	String clientGuess;
 
@@ -101,15 +104,21 @@ public class TheGameOfMorra extends Application {
 		openingScreenButton.relocate(210, 400);
 
 		// set up waiting screen:
-		waitingText = new Text("Waiting for another player...");
-		waitingText.setFont(Font.font ("Verdana", 40));
-		waitingText.setStyle("-fx-font-weight: bold");
-		waitingText.setFill(Color.INDIGO);
+		player1GameEndText = new Text("Player 1 ");
+		player1GameEndText.setFont(Font.font ("Verdana", 40));
+		player1GameEndText.setStyle("-fx-font-weight: bold");
+		player1GameEndText.setFill(Color.INDIGO);
 
-		waitingScenePane = new Pane(waitingText);
-		waitingScenePane.setBackground(new Background(new BackgroundImage(new Image("istockphoto-686783780-612x612.jpg", 1100, 495, false,true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,  BackgroundSize.DEFAULT)));
+		player2GameEndText = new Text ("Player 2 ");
+		player1GameEndText.setFont(Font.font ("Verdana", 40));
+		player1GameEndText.setStyle("-fx-font-weight: bold");
+		player1GameEndText.setFill(Color.INDIGO);
 
-		waitingText.relocate(220, 225);
+		gameEndScenePane = new Pane(player1GameEndText, player2GameEndText);
+		gameEndScenePane.setBackground(new Background(new BackgroundImage(new Image("istockphoto-686783780-612x612.jpg", 1100, 495, false,true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,  BackgroundSize.DEFAULT)));
+
+		player1GameEndText.relocate(220, 250);
+		player2GameEndText.relocate(220, 200);
 
 		// set up main screen:
 		listItems2 = new ListView<String>();
@@ -136,15 +145,15 @@ public class TheGameOfMorra extends Application {
 
 		HBox guessImages = new HBox(18, stone0, stone1, stone2, stone3, stone4, stone5);
 
-		player1Score = new Text("Player 1 score:");
-		player1Score.setFont(Font.font ("Verdana", 20));
-		player1Score.setStyle("-fx-font-weight: bold");
-		player1Score.setFill(Color.INDIGO);
+		player1ScoreText = new Text("Player 1 score: " + player1Score);
+		player1ScoreText.setFont(Font.font ("Verdana", 20));
+		player1ScoreText.setStyle("-fx-font-weight: bold");
+		player1ScoreText.setFill(Color.INDIGO);
 
-		player2Score = new Text("Player 2 score:");
-		player2Score.setFont(Font.font ("Verdana", 20));
-		player2Score.setStyle("-fx-font-weight: bold");
-		player2Score.setFill(Color.INDIGO);
+		player2ScoreText = new Text("Player 2 score: " + player2Score);
+		player2ScoreText.setFont(Font.font ("Verdana", 20));
+		player2ScoreText.setStyle("-fx-font-weight: bold");
+		player2ScoreText.setFill(Color.INDIGO);
 
 		opponentPlay = new Text("Opponent played:");
 		opponentPlay.setFont(Font.font ("Verdana", 20));
@@ -152,15 +161,15 @@ public class TheGameOfMorra extends Application {
 		opponentPlay.setFill(Color.INDIGO);
 
 
-		mainScenePane.getChildren().addAll(answerBox, submitButton, listItems2, guessImages, player1Score, player2Score, opponentPlay, quitButton);
+		mainScenePane.getChildren().addAll(answerBox, submitButton, listItems2, guessImages, player1ScoreText, player2ScoreText, opponentPlay, quitButton);
 		answerBox.relocate(20,170);
 		submitButton.relocate(20, 210);
 		quitButton.relocate(20, 250);
 		listItems2.relocate(700, 10);
 		guessImages.relocate(0, 380);
 		opponentPlay.relocate(5, 10);
-		player1Score.relocate(275,10);
-		player2Score.relocate(275, 50);
+		player1ScoreText.relocate(275,10);
+		player2ScoreText.relocate(275, 50);
 
 
 		// implement clicking functionality for buttons:
@@ -186,15 +195,8 @@ public class TheGameOfMorra extends Application {
 				}, Integer.parseInt(portBox.getText()), ipBox.getText());
 				clientConnection.start();
 
-				// if there are two clients, then display the main game, otherwise display the waiting screen
-				//if (clientConnection.clientInfo.isTwoPlayers()) {
-					sceneMap.put("main screen", new Scene(mainScenePane,1100,495));
-					primaryStage.setScene(sceneMap.get("main screen"));
-				//}
-				/*else {
-					sceneMap.put("waiting screen", new Scene(waitingScenePane, 1100, 495));
-					primaryStage.setScene(sceneMap.get("waiting screen"));
-				}*/
+				sceneMap.put("main screen", new Scene(mainScenePane,1100,495));
+				primaryStage.setScene(sceneMap.get("main screen"));
 			}
 		});
 
@@ -343,6 +345,21 @@ public class TheGameOfMorra extends Application {
 				if (Integer.parseInt(answerBox.getText()) >= 1 || Integer.parseInt(answerBox.getText()) <= 10) {
 					// send number option and guess to server
 					clientConnection.send(clientGuess);
+
+					// display opponent's pick
+					if (clientConnection.clientInfo.getpNum() == 1) {
+						System.out.println(clientConnection.clientInfo.getP2Plays());
+						ImageView opponentPick = new ImageView(new Image("stone" + clientConnection.clientInfo.getP2Plays() + "copy.png", 100, 100, false, true));
+					    mainScenePane.getChildren().add(opponentPick);
+					    opponentPick.relocate(50, 40);
+					}
+					else {
+						System.out.println(clientConnection.clientInfo.getP1Plays());
+						ImageView opponentPick = new ImageView(new Image("stone" + clientConnection.clientInfo.getP1Plays() + "copy.png", 100, 100, false, true));
+					    mainScenePane.getChildren().add(opponentPick);
+					    opponentPick.relocate(50, 40);
+					}
+
 					clientConnection.send(answerBox.getText());
 
 					// clear textbox and show numbers
@@ -365,11 +382,6 @@ public class TheGameOfMorra extends Application {
 
 					stone5.setDisable(false);
 					stone5.setVisible(true);
-
-					// display opponent's pick
-//					ImageView opponentPick = new ImageView(new Image("stone" + /*finger pick of client that isn't this one*/ + "copy.png", 100, 100, false, true));
-//					mainScenePane.getChildren().add(opponentPick);
-//					opponentPick.relocate(50, 40);
 				}
 			}
 		});
